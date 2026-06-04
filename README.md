@@ -48,7 +48,7 @@ $ askey all
 Install local version:
 
 ```
-git clone git@github.com:t-bltg/ascii_key.git
+git clone git@github.com:ascii-music/ascii_key.git
 cd ascii_key
 cargo install --path .
 ```
