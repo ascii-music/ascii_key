@@ -1,12 +1,12 @@
-[![CI](https://github.com/t-bltg/ascii_key/actions/workflows/ci.yml/badge.svg)](
-  https://github.com/t-bltg/ascii_key/actions?query=workflow%3Aci
+[![CI](https://github.com/ascii-music/ascii_key/actions/workflows/ci.yml/badge.svg)](
+  https://github.com/ascii-music/ascii_key/actions?query=workflow%3Aci
 )
 
 # Ascii Key
 
 A command line tool for showing how to play piano chords.
 
-Inspired by https://github.com/yzhong52/ascii_chord
+Inspired by https://github.com/ascii-music/ascii_chord
 
 ## Usage
 
