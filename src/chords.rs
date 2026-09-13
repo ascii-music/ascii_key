@@ -46,6 +46,7 @@ pub static ALL_CHORDS: &'static [Chord] = &[
     Chord::new(&["Eadd2"], "eFGb", "", &["E added 2ⁿᵈ"]),
     Chord::new(&["Em"], "egb", "", &["E minor"]),
     Chord::new(&["F"], "fa0", "", &["F"]),
+    Chord::new(&["F7"], "fa03", "", &["F 7ᵗʰ"]),
     Chord::new(&["Fm"], "fG0", "", &["F minor"]),
     // A/C# is an A major chord with C# as the bass note and A/E is an A major chord with E as the bass note
     Chord::new(&["A/C#", "A/Db"], "Cea", "", &["A over C♯", "A over D♭"]),
@@ -108,6 +109,7 @@ pub static ALL_CHORDS: &'static [Chord] = &[
 
     // sources
     // pianowithjonny.com/piano-lessons/major-7th-chords-for-piano-a-complete-guide
+    // pianowithjonny.com/piano-lessons/7th-chords-for-piano-the-complete-guide
 ];
 
 pub static ALL_CHORDS_BY_SHORT_NAMES: Lazy<HashMap<String, Vec<&'static Chord<'static>>>> =
