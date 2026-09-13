@@ -1,12 +1,10 @@
 use itertools::join;
 
-// cdefgab
 pub const KEYBOARD1: &str = "\
 ┌─┬─┬┬─┬─┬─┬─┬┬─┬┬─┬─┬─┬─┬┬─┬─┐
 │ └┬┘└┬┘ │ └┬┘└┬┘└┬┘ │ └┬┘└┬┘ │
 └──┴──┴──┴──┴──┴──┴──┴──┴──┴──┘";
 
-// fgabcde
 pub const KEYBOARD2: &str = "\
 ┌─┬─┬┬─┬┬─┬─┬─┬─┬┬─┬─┬─┬─┬┬─┬┬─┬─┐
 │ └┬┘└┬┘└┬┘ │ └┬┘└┬┘ │ └┬┘└┬┘└┬┘ │
@@ -128,7 +126,17 @@ impl<'a> Chord<'a> {
     }
 
     pub fn keyboard(&self) -> String {
-        let kb1 = self.keyboard1();
-        if kb1.is_empty() { self.keyboard2() } else { kb1 }
+        let (kb1, kb2) = (self.keyboard1(), self.keyboard2());
+        if kb1.is_empty() {
+            kb2
+        } else if kb2.is_empty() {
+            kb1
+        } else {  // interleave keyboard1 and keyboard2
+            kb1.lines()
+            .zip(kb2.lines())
+            .map(|(a, b)| format!("{a}{b}"))
+            .collect::<Vec<_>>()
+            .join("\n")
+        }
     }
 }
