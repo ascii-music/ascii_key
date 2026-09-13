@@ -48,9 +48,6 @@ pub static ALL_CHORDS: &'static [Chord] = &[
     Chord::new(&["F"], "fa0", "", &["F"]),
     Chord::new(&["F7"], "fa03", "", &["F 7ᵗʰ"]),
     Chord::new(&["Fm"], "fG0", "", &["F minor"]),
-    // A/C# is an A major chord with C# as the bass note and A/E is an A major chord with E as the bass note
-    Chord::new(&["A/C#", "A/Db"], "Cea", "", &["A over C♯", "A over D♭"]),
-    Chord::new(&["A/E"], "ea1", "", &["A over E"]),
     // keyboard 2 ≡ upper part
     // ┌─┬F┬┬G┬┬A┬─┬─┬C┬┬D┬─┬─┬1┬┬3┬┬5┬─┐
     // │ └┬┘└┬┘└┬┘ │ └┬┘└┬┘ │ └┬┘└┬┘└┬┘ │
@@ -106,10 +103,37 @@ pub static ALL_CHORDS: &'static [Chord] = &[
     Chord::new(&["Bdim"], "", "bd0", &["B diminished"]),
     Chord::new(&["Bdim7"], "", "bd03", &["B diminished 7ᵗʰ"]),
     Chord::new(&["B+"], "", "bD2", &["B augmented"]),
+    // slash / inversion chords (some might be hybrid)
+    // ┌─┬C┬┬D┬─┬─┬F┬┬G┬┬A┬─┬─┬1┬┬3┬─┐┌─┬F┬┬G┬┬A┬─┬─┬C┬┬D┬─┬─┬1┬┬3┬┬5┬─┐
+    // │ └┬┘└┬┘ │ └┬┘└┬┘└┬┘ │ └┬┘└┬┘ ││ └┬┘└┬┘└┬┘ │ └┬┘└┬┘ │ └┬┘└┬┘└┬┘ │
+    // └c─┴d─┴e─┴f─┴g─┴a─┴b─┴0─┴2─┴4─┘└f─┴g─┴a─┴b─┴c─┴d─┴e─┴0─┴2─┴4─┴6─┘
+    // A/C# is an A major chord with C# as the bass note and A/E is an A major chord with E as the bass note
+    // pianochord.org/c-major.html#hide1
+    Chord::new(&["C/E"], "eg0", "", &["C over E"]),
+    Chord::new(&["C/G"], "g04", "", &["C over G"]),
+    // pianochord.org/d-major.html#hide1
+    Chord::new(&["D/F#", "D/Gb"], "", "Fad", &["D over F♯", "D over G♭"]),
+    Chord::new(&["D/A"], "", "ad1", &["D over A"]),
+    // pianochord.org/e-major.html#hide1
+    Chord::new(&["E/G#", "E/Ab"], "", "Gbe", &["E over G♯", "E over A♭"]),
+    Chord::new(&["E/B"], "", "be3", &["E over B"]),
+    // pianochord.org/f-major.html#hide1
+    Chord::new(&["F/A"], "", "ac0", &["F over A"]),
+    Chord::new(&["F/C"], "", "c04", &["F over C"]),
+    // pianochord.org/g-major.html#hide1
+    Chord::new(&["G/B"], "", "bd2", &["G over B"]),
+    Chord::new(&["G/D"], "", "d26", &["G over B"]),
+    // pianochord.org/a-major.html#hide1
+    Chord::new(&["A/C#", "A/Db"], "Cea", "", &["A over C♯", "A over D♭"]),
+    Chord::new(&["A/E"], "ea1", "", &["A over E"]),
+    // pianochord.org/b-major.html#hide1
+    Chord::new(&["B/D#", "B/Eb"], "DFb", "", &["B over D♯", "B over E♭"]),
+    Chord::new(&["B/F#", "B/Gb"], "Fb3", "", &["B over F♯", "B over G♭"]),
 
     // sources
     // pianowithjonny.com/piano-lessons/major-7th-chords-for-piano-a-complete-guide
-    // pianowithjonny.com/piano-lessons/7th-chords-for-piano-the-complete-guide
+    // pianowithjonny.com/piano-lessons/7th-chords-for-piano-the-complete-guide*
+    // slash chords / inversions : piano-lessons-info.com/fmajorchord.html
 ];
 
 pub static ALL_CHORDS_BY_SHORT_NAMES: Lazy<HashMap<String, Vec<&'static Chord<'static>>>> =
@@ -133,8 +157,25 @@ mod tests {
 
     #[test]
     fn test_single_pattern() {
-        for chord in ALL_CHORDS {
+        'outer: for chord in ALL_CHORDS {
+            for short_name in chord.short_names {
+                if short_name.contains('/') {  // slash chords might be hybrid
+                    continue 'outer
+                }
+            }
             assert!(chord.pattern1.is_empty() || chord.pattern2.is_empty())
+        }
+    }
+
+    #[test]
+    fn test_digit_or_char() {
+        for chord in ALL_CHORDS {
+            for chr in chord.pattern1.chars() {
+                assert!("abcdefgACDEFG01234".contains(chr));
+            }
+            for chr in chord.pattern2.chars() {
+                assert!("abcdefgACDEFG0123456".contains(chr));
+            }
         }
     }
 }
