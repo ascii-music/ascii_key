@@ -16,10 +16,16 @@ pub const KEYBOARD2: &str = "\
 pub struct Chord<'a> {
     pub short_names: &'a [&'a str],
     // cdefgab and CDFGA ≡ c♯d♯f♯g♯a♯ AND
-    // 01234 for the last notes (cc♯dd♯e)
+    // 01234 for the last notes (cc♯dd♯e) :
+    // ┌─┬C┬┬D┬─┬─┬F┬┬G┬┬A┬─┬─┬1┬┬3┬─┐
+    // │ └┬┘└┬┘ │ └┬┘└┬┘└┬┘ │ └┬┘└┬┘ │
+    // └c─┴d─┴e─┴f─┴g─┴a─┴b─┴0─┴2─┴4─┘
     pub pattern1: &'a str,
     // fgabcde and FGACD ≡ f♯g♯a♯c♯d♯ AND
-    // 0123456 for the last notes (ff♯gg♯ee♯d)
+    // 0123456 for the last notes (ff♯gg♯ee♯d) :
+    // ┌─┬F┬┬G┬┬A┬─┬─┬C┬┬D┬─┬─┬1┬┬3┬┬5┬─┐
+    // │ └┬┘└┬┘└┬┘ │ └┬┘└┬┘ │ └┬┘└┬┘└┬┘ │
+    // └f─┴g─┴a─┴b─┴c─┴d─┴e─┴0─┴2─┴4─┴6─┘
     pub pattern2: &'a str,
     pub names: &'a [&'a str],
 }
