@@ -9,19 +9,15 @@ pub const KEYBOARD: &str = "\
 pub struct Chord<'a> {
     pub short_names: &'a [&'a str],
     // cdefgab and CDFGA ≡ c♯d♯f♯g♯a♯ and - as a seperator
-    // \0─┬C┬┬D┬─┬─┬F┬┬G┬┬A┬─\0
-    // \0 └┬┘└┬┘ │ └┬┘└┬┘└┬┘ \0
-    // \0c─┴d─┴e─┴f─┴g─┴a─┴b─\0
+    // ─┬C┬┬D┬─┬─┬F┬┬G┬┬A┬─
+    //  └┬┘└┬┘ │ └┬┘└┬┘└┬┘
+    // c─┴d─┴e─┴f─┴g─┴a─┴b─
     pub pattern: &'a str,
     pub names: &'a [&'a str],
 }
 
 impl<'a> Chord<'a> {
-    pub const fn new(
-        short_names: &'a [&'a str],
-        pattern: &'a str,
-        names: &'a [&'a str],
-    ) -> Self {
+    pub const fn new(short_names: &'a [&'a str], pattern: &'a str, names: &'a [&'a str]) -> Self {
         Self {
             short_names: short_names,
             pattern: pattern,
@@ -41,10 +37,13 @@ impl<'a> Chord<'a> {
         let width: usize = KEYBOARD.chars().position(|c| c == '\n').expect("newline") + 1;
         let n_max: usize = self.pattern.chars().filter(|c| *c == '-').count();
 
-        let mut board : Vec<String> = Vec::new();
-        let mut n: usize = 0;
-
         let mut segment: Vec<char> = KEYBOARD.chars().collect();
+        segment[0 * width] = '┌';
+        segment[1 * width] = '│';
+        segment[2 * width] = '└';
+
+        let mut board: Vec<String> = Vec::new();
+        let mut n: usize = 0;
         for ch in self.pattern.chars() {
             if ch == '-' {
                 n += 1;
@@ -52,12 +51,6 @@ impl<'a> Chord<'a> {
                 board.push(segment.iter().collect::<String>());
                 segment = KEYBOARD.chars().collect();
                 continue;
-            }
-
-            if n == 0 {
-                segment[0 * width] = if n == 0 { '┌' } else { '┬' };
-                segment[1 * width] = '│';
-                segment[2 * width] = if n == 0 { '└' } else { '┴' };
             }
 
             let idx: usize = match ch {
@@ -85,16 +78,10 @@ impl<'a> Chord<'a> {
         segment.push('\n');
         board.push(segment.iter().collect::<String>());
 
-        let lines: Vec<Vec<&str>> =
-            board.iter().map(|s| s.lines().collect()).collect();
+        let lines: Vec<Vec<&str>> = board.iter().map(|s| s.lines().collect()).collect();
 
         (0..lines[0].len())
-            .map(|i| {
-                lines
-                    .iter()
-                    .map(|s| s[i])
-                    .collect::<String>()
-            })
+            .map(|i| lines.iter().map(|s| s[i]).collect::<String>())
             .collect::<Vec<_>>()
             .join("\n")
     }
