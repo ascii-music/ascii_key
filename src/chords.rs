@@ -23,8 +23,18 @@ pub static ALL_CHORDS: &'static [Chord] = &[
     Chord::new(&["C#", "Db"], "CfG", "", &["C♯ ", "D♭"]),
     Chord::new(&["C#7", "Db7"], "CfGb", "", &["C♯ 7ᵗʰ", "D♭ 7ᵗʰ"]),
     Chord::new(&["C#m", "Dbm"], "CeG", "", &["C♯ minor", "D♭ minor"]),
-    Chord::new(&["C#m7", "Dbm7"], "CeGb", "", &["C♯ minor 7ᵗʰ", "D♭ minor 7ᵗʰ"]),
-    Chord::new(&["C#maj7", "Dbmaj7"], "CfG0", "", &["C♯ raised 7ᵗʰ", "D♭ raised 7ᵗʰ"]),
+    Chord::new(
+        &["C#m7", "Dbm7"],
+        "CeGb",
+        "",
+        &["C♯ minor 7ᵗʰ", "D♭ minor 7ᵗʰ"],
+    ),
+    Chord::new(
+        &["C#maj7", "Dbmaj7"],
+        "CfG0",
+        "",
+        &["C♯ raised 7ᵗʰ", "D♭ raised 7ᵗʰ"],
+    ),
     Chord::new(&["D"], "dFa", "", &["D"]),
     Chord::new(&["D7"], "dFa0", "", &["D 7ᵗʰ"]),
     Chord::new(&["Dmaj7"], "dFa1", "", &["D raised 7ᵗʰ"]),
@@ -36,8 +46,18 @@ pub static ALL_CHORDS: &'static [Chord] = &[
     Chord::new(&["D#", "Eb"], "DgA", "", &["D♯", "E♭"]),
     Chord::new(&["D#7", "Eb7"], "DgA1", "", &["D♯ 7ᵗʰ", "E♭ 7ᵗʰ"]),
     Chord::new(&["D#m", "Ebm"], "DFA", "", &["D♯ minor", "E♭ minor"]),
-    Chord::new(&["D#m7", "Ebm7"], "DFA1", "", &["D♯ minor 7ᵗʰ", "E♭ minor 7ᵗʰ"]),
-    Chord::new(&["D#maj7", "Ebmaj7"], "DgA2", "", &["D♯ raised 7ᵗʰ", "E♭ raised 7ᵗʰ"]),
+    Chord::new(
+        &["D#m7", "Ebm7"],
+        "DFA1",
+        "",
+        &["D♯ minor 7ᵗʰ", "E♭ minor 7ᵗʰ"],
+    ),
+    Chord::new(
+        &["D#maj7", "Ebmaj7"],
+        "DgA2",
+        "",
+        &["D♯ raised 7ᵗʰ", "E♭ raised 7ᵗʰ"],
+    ),
     Chord::new(&["E"], "eGb", "", &["E"]),
     Chord::new(&["E7"], "eGb2", "", &["E 7ᵗʰ"]),
     Chord::new(&["Emaj7"], "eGb3", "", &["E raised 7ᵗʰ"]),
@@ -55,8 +75,18 @@ pub static ALL_CHORDS: &'static [Chord] = &[
     Chord::new(&["F#", "Gb"], "", "FAC", &["F♯", "G♭"]),
     Chord::new(&["F#7", "Gb7"], "", "FACe", &["F♯ 7ᵗʰ", "G♭ 7ᵗʰ"]),
     Chord::new(&["F#m", "Gbm"], "", "FaC", &["F♯ minor", "G♭ minor"]),
-    Chord::new(&["F#m7", "Gbm7"], "", "FaCe", &["F♯ minor 7ᵗʰ", "G♭ minor 7ᵗʰ"]),
-    Chord::new(&["F#maj7", "Gbmaj7"], "", "FAC0", &["F♯ raised 7ᵗʰ", "G♭ raised 7ᵗʰ"]),
+    Chord::new(
+        &["F#m7", "Gbm7"],
+        "",
+        "FaCe",
+        &["F♯ minor 7ᵗʰ", "G♭ minor 7ᵗʰ"],
+    ),
+    Chord::new(
+        &["F#maj7", "Gbmaj7"],
+        "",
+        "FAC0",
+        &["F♯ raised 7ᵗʰ", "G♭ raised 7ᵗʰ"],
+    ),
     Chord::new(&["G"], "", "gbd", &["G"]),
     Chord::new(&["G7"], "", "gbd0", &["G 7ᵗʰ"]),
     Chord::new(&["Gmaj7"], "", "gbd1", &["G raised 7ᵗʰ"]),
@@ -72,8 +102,18 @@ pub static ALL_CHORDS: &'static [Chord] = &[
     Chord::new(&["G#", "Ab"], "", "GcD", &["G♯", "A♭"]),
     Chord::new(&["G#7", "Ab7"], "", "GcD1", &["G♯ 7ᵗʰ", "A♭ 7ᵗʰ"]),
     Chord::new(&["G#m", "Abm"], "", "GbD", &["G♯ minor", "A♭ minor"]),
-    Chord::new(&["G#m7", "Abm7"], "", "GbD1", &["G♯ minor 7ᵗʰ", "A♭ minor 7ᵗʰ"]),
-    Chord::new(&["G#maj7", "Abmaj7"], "GcD2", "", &["G♯ raised 7ᵗʰ", "A♭ raised 7ᵗʰ"]),
+    Chord::new(
+        &["G#m7", "Abm7"],
+        "",
+        "GbD1",
+        &["G♯ minor 7ᵗʰ", "A♭ minor 7ᵗʰ"],
+    ),
+    Chord::new(
+        &["G#maj7", "Abmaj7"],
+        "GcD2",
+        "",
+        &["G♯ raised 7ᵗʰ", "A♭ raised 7ᵗʰ"],
+    ),
     Chord::new(&["A"], "", "aCe", &["A"]),
     Chord::new(&["A7"], "", "aCe2", &["A 7ᵗʰ"]),
     Chord::new(&["Amaj7"], "", "aCe3", &["A raised 7ᵗʰ"]),
@@ -89,8 +129,18 @@ pub static ALL_CHORDS: &'static [Chord] = &[
     Chord::new(&["A#", "Bb"], "", "Ad0", &["A♯", "B♭"]),
     Chord::new(&["A#7", "Bb7"], "", "Ad03", &["A♯ 7ᵗʰ", "B♭ 7ᵗʰ"]),
     Chord::new(&["A#m", "Bbm"], "", "AC0", &["A♯ minor", "B♭ minor"]),
-    Chord::new(&["A#m7", "Bbm7"], "", "AC03", &["A♯ minor 7ᵗʰ", "B♭ minor 7ᵗʰ"]),
-    Chord::new(&["A#maj7", "Bbmaj7"], "", "Ad04", &["A♯ raised 7ᵗʰ", "B♭ raised 7ᵗʰ"]),
+    Chord::new(
+        &["A#m7", "Bbm7"],
+        "",
+        "AC03",
+        &["A♯ minor 7ᵗʰ", "B♭ minor 7ᵗʰ"],
+    ),
+    Chord::new(
+        &["A#maj7", "Bbmaj7"],
+        "",
+        "Ad04",
+        &["A♯ raised 7ᵗʰ", "B♭ raised 7ᵗʰ"],
+    ),
     Chord::new(&["B"], "", "bD1", &["B"]),
     Chord::new(&["B7"], "", "bD14", &["B 7ᵗʰ"]),
     Chord::new(&["Bmaj7"], "", "bD15", &["B raised 7ᵗʰ"]),
@@ -129,7 +179,6 @@ pub static ALL_CHORDS: &'static [Chord] = &[
     // pianochord.org/b-major.html#hide1
     Chord::new(&["B/D#", "B/Eb"], "DFb", "", &["B over D♯", "B over E♭"]),
     Chord::new(&["B/F#", "B/Gb"], "Fb3", "", &["B over F♯", "B over G♭"]),
-
     // sources
     // pianowithjonny.com/piano-lessons/major-7th-chords-for-piano-a-complete-guide
     // pianowithjonny.com/piano-lessons/7th-chords-for-piano-the-complete-guide*
@@ -142,9 +191,7 @@ pub static ALL_CHORDS_BY_SHORT_NAMES: Lazy<HashMap<String, Vec<&'static Chord<'s
 
         for chord in ALL_CHORDS {
             for sn in chord.short_names {
-                map.entry(sn.to_ascii_lowercase())
-                    .or_default()
-                    .push(chord);
+                map.entry(sn.to_ascii_lowercase()).or_default().push(chord);
             }
         }
         map
@@ -159,8 +206,9 @@ mod tests {
     fn test_single_pattern() {
         'outer: for chord in ALL_CHORDS {
             for short_name in chord.short_names {
-                if short_name.contains('/') {  // slash chords might be hybrid
-                    continue 'outer
+                if short_name.contains('/') {
+                    // slash chords might be hybrid
+                    continue 'outer;
                 }
             }
             assert!(chord.pattern1.is_empty() || chord.pattern2.is_empty())

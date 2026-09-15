@@ -1,6 +1,6 @@
 use crate::chord::Chord;
 use clap::ValueEnum;
-use itertools::{join, Itertools};
+use itertools::{Itertools, join};
 
 #[derive(Debug, ValueEnum, Clone)]
 pub enum NameStyle {
@@ -18,10 +18,7 @@ pub fn row<'a>(chords: Vec<Chord<'a>>, name_style: NameStyle) -> String {
             NameStyle::BothNames => chord.both_names(),
         })
         .collect();
-    let keyboard: Vec<String> = chords
-        .iter()
-        .map(|chord| chord.keyboard())
-        .collect();
+    let keyboard: Vec<String> = chords.iter().map(|chord| chord.keyboard()).collect();
 
     let lines: Vec<String> = names.into_iter().interleave(keyboard.into_iter()).collect();
     lines.join("\n")

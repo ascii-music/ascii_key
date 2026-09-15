@@ -1,8 +1,8 @@
 use clap::{Parser, Subcommand};
 use stitcher::NameStyle;
 
-use crate::{chords, stitcher};
 use crate::chord::Chord;
+use crate::{chords, stitcher};
 use std::fs;
 
 // a CLI to show you how to play a piano chord
@@ -105,7 +105,9 @@ impl ListArgs {
                 match chords::ALL_CHORDS_BY_SHORT_NAMES.get(&name.to_ascii_lowercase()) {
                     Some::<&Vec<&'static Chord<'static>>>(matched_chords) => matched_chords
                         .into_iter()
-                        .map(|chord: &&'static Chord<'static>| -> Chord<'static> { (*chord).clone() })
+                        .map(|chord: &&'static Chord<'static>| -> Chord<'static> {
+                            (*chord).clone()
+                        })
                         .collect(),
                     None => {
                         println!("Unknown chord '{}'", name);

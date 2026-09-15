@@ -44,9 +44,11 @@ impl<'a> Chord<'a> {
     }
 
     pub fn both_names(&self) -> String {
-        format!("{} ({})",
-                join(self.names, "|"),
-                join(self.short_names, "|"))
+        format!(
+            "{} ({})",
+            join(self.names, "|"),
+            join(self.short_names, "|")
+        )
     }
 
     pub fn keyboard1(&self) -> String {
@@ -131,12 +133,13 @@ impl<'a> Chord<'a> {
             kb2
         } else if kb2.is_empty() {
             kb1
-        } else {  // interleave keyboard1 and keyboard2
+        } else {
+            // interleave keyboard1 and keyboard2
             kb1.lines()
-            .zip(kb2.lines())
-            .map(|(a, b)| format!("{a}{b}"))
-            .collect::<Vec<_>>()
-            .join("\n")
+                .zip(kb2.lines())
+                .map(|(a, b)| format!("{a}{b}"))
+                .collect::<Vec<_>>()
+                .join("\n")
         }
     }
 }
