@@ -18,7 +18,9 @@ jobs:
           # - nightly
 
     steps:
-    - uses: actions/checkout@v6
+    - uses: actions/checkout@v7
     - run: rustup update ${{ matrix.toolchain }} && rustup default ${{ matrix.toolchain }}
+    - run: cargo fmt --check
+    - run: RUSTFLAGS='-D warnings' cargo check
     - run: cargo build --verbose
     - run: cargo test --verbose
