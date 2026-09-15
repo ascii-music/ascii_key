@@ -195,43 +195,16 @@ mod tests {
         }
     }
 
-    /*
-        #[test]
-        fn test_single_pattern() {
-            'outer: for chord in ALL_CHORDS {
-                for short_name in chord.short_names {
-                    if short_name.contains('/') {
-                        // slash chords might be hybrid
-                        continue 'outer;
-                    }
-                }
-                assert!(chord.pattern1.is_empty() || chord.pattern2.is_empty())
-            }
+    #[test]
+    fn test_aliases() {
+        for chord in ALL_CHORDS {
+            assert_eq!(
+                chord.short_names.len(),
+                chord.names.len(),
+                "Alias issue short_names={:?} names={:?}",
+                chord.short_names,
+                chord.names
+            )
         }
-
-        #[test]
-        fn test_digit_or_char() {
-            for chord in ALL_CHORDS {
-                for chr in chord.pattern1.chars() {
-                    assert!("abcdefgACDFG01234".contains(chr));
-                }
-                for chr in chord.pattern2.chars() {
-                    assert!("abcdefgACDFG0123456".contains(chr));
-                }
-            }
-        }
-
-        #[test]
-        fn test_aliases() {
-            for chord in ALL_CHORDS {
-                assert_eq!(
-                    chord.short_names.len(),
-                    chord.names.len(),
-                    "Aliases issue short_names={:?} names={:?}",
-                    chord.short_names,
-                    chord.names
-                )
-            }
-        }
-    */
+    }
 }
