@@ -5,18 +5,6 @@ pub const KEYBOARD: &str = "\
 \0 └┬┘└┬┘ │ └┬┘└┬┘└┬┘ \0
 \0──┴──┴──┴──┴──┴──┴──\0";
 
-/*
-pub const KEYBOARD1: &str = "\
-┌─┬─┬┬─┬─┬─┬─┬┬─┬┬─┬─┬─┬─┬┬─┬─┐
-│ └┬┘└┬┘ │ └┬┘└┬┘└┬┘ │ └┬┘└┬┘ │
-└──┴──┴──┴──┴──┴──┴──┴──┴──┴──┘";
-
-pub const KEYBOARD2: &str = "\
-┌─┬─┬┬─┬┬─┬─┬─┬─┬┬─┬─┬─┬─┬┬─┬┬─┬─┐
-│ └┬┘└┬┘└┬┘ │ └┬┘└┬┘ │ └┬┘└┬┘└┬┘ │
-└──┴──┴──┴──┴──┴──┴──┴──┴──┴──┴──┘";
-*/
-
 #[derive(Debug, Clone)]
 pub struct Chord<'a> {
     pub short_names: &'a [&'a str],
@@ -32,15 +20,11 @@ impl<'a> Chord<'a> {
     pub const fn new(
         short_names: &'a [&'a str],
         pattern: &'a str,
-        // pattern1: &'a str,
-        // pattern2: &'a str,
         names: &'a [&'a str],
     ) -> Self {
         Self {
             short_names: short_names,
             pattern: pattern,
-            // pattern1: pattern1,
-            // pattern2: pattern2,
             names: names,
         }
     }
