@@ -54,7 +54,6 @@ impl<'a> Chord<'a> {
             }
 
             let idx: usize = match ch {
-                // notes
                 'C' => 0 * width + 3,
                 'D' => 0 * width + 6,
                 'F' => 0 * width + 12,
@@ -67,7 +66,7 @@ impl<'a> Chord<'a> {
                 'g' => 2 * width + 13,
                 'a' => 2 * width + 16,
                 'b' => 2 * width + 19,
-                _ => panic!(),
+                _ => panic!("Unrecognized character ch={:?}", ch),
             };
             segment[idx] = '●';
 
