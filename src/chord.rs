@@ -1,44 +1,26 @@
 use itertools::join;
 
-pub const KEYBOARD1: &str = "\
-┌─┬─┬┬─┬─┬─┬─┬┬─┬┬─┬─┬─┬─┬┬─┬─┐
-│ └┬┘└┬┘ │ └┬┘└┬┘└┬┘ │ └┬┘└┬┘ │
-└──┴──┴──┴──┴──┴──┴──┴──┴──┴──┘";
-
-pub const KEYBOARD2: &str = "\
-┌─┬─┬┬─┬┬─┬─┬─┬─┬┬─┬─┬─┬─┬┬─┬┬─┬─┐
-│ └┬┘└┬┘└┬┘ │ └┬┘└┬┘ │ └┬┘└┬┘└┬┘ │
-└──┴──┴──┴──┴──┴──┴──┴──┴──┴──┴──┘";
+pub const KEYBOARD: &str = "\
+\0─┬─┬┬─┬─┬─┬─┬┬─┬┬─┬─\0
+\0 └┬┘└┬┘ │ └┬┘└┬┘└┬┘ \0
+\0──┴──┴──┴──┴──┴──┴──\0";
 
 #[derive(Debug, Clone)]
 pub struct Chord<'a> {
     pub short_names: &'a [&'a str],
-    // cdefgab and CDFGA ≡ c♯d♯f♯g♯a♯ AND
-    // 01234 for the last notes (cc♯dd♯e) :
-    // ┌─┬C┬┬D┬─┬─┬F┬┬G┬┬A┬─┬─┬1┬┬3┬─┐
-    // │ └┬┘└┬┘ │ └┬┘└┬┘└┬┘ │ └┬┘└┬┘ │
-    // └c─┴d─┴e─┴f─┴g─┴a─┴b─┴0─┴2─┴4─┘
-    pub pattern1: &'a str,
-    // fgabcde and FGACD ≡ f♯g♯a♯c♯d♯ AND
-    // 0123456 for the last notes (ff♯gg♯ee♯d) :
-    // ┌─┬F┬┬G┬┬A┬─┬─┬C┬┬D┬─┬─┬1┬┬3┬┬5┬─┐
-    // │ └┬┘└┬┘└┬┘ │ └┬┘└┬┘ │ └┬┘└┬┘└┬┘ │
-    // └f─┴g─┴a─┴b─┴c─┴d─┴e─┴0─┴2─┴4─┴6─┘
-    pub pattern2: &'a str,
+    // cdefgab and CDFGA ≡ c♯d♯f♯g♯a♯ and - as a seperator
+    // ─┬C┬┬D┬─┬─┬F┬┬G┬┬A┬─
+    //  └┬┘└┬┘ │ └┬┘└┬┘└┬┘
+    // c─┴d─┴e─┴f─┴g─┴a─┴b─
+    pub pattern: &'a str,
     pub names: &'a [&'a str],
 }
 
 impl<'a> Chord<'a> {
-    pub const fn new(
-        short_names: &'a [&'a str],
-        pattern1: &'a str,
-        pattern2: &'a str,
-        names: &'a [&'a str],
-    ) -> Self {
+    pub const fn new(short_names: &'a [&'a str], pattern: &'a str, names: &'a [&'a str]) -> Self {
         Self {
             short_names: short_names,
-            pattern1: pattern1,
-            pattern2: pattern2,
+            pattern: pattern,
             names: names,
         }
     }
@@ -51,17 +33,33 @@ impl<'a> Chord<'a> {
         )
     }
 
-    pub fn keyboard1(&self) -> String {
-        if self.pattern1.trim().is_empty() {
-            return String::from("");
-        }
+    pub fn keyboard(&self) -> String {
+        let width: usize = KEYBOARD.chars().position(|c| c == '\n').expect("newline") + 1;
+        let n_max: usize = self.pattern.chars().filter(|c| *c == '-').count();
 
-        let mut board: Vec<char> = KEYBOARD1.chars().collect();
-        let width: usize = board.iter().position(|c| *c == '\n').expect("newline") + 1;
+        let mut segment: Vec<char> = KEYBOARD.chars().collect();
+        segment[0 * width] = '┌';
+        segment[1 * width] = '│';
+        segment[2 * width] = '└';
 
-        for ch in self.pattern1.chars() {
+        let mut board: Vec<String> = Vec::new();
+        let mut n: usize = 0;
+        for ch in self.pattern.chars() {
+            if ch == '-' {
+                n += 1;
+                segment.push('\n');
+                board.push(segment.iter().collect::<String>());
+                segment = KEYBOARD.chars().collect();
+                continue;
+            }
+
             let idx: usize = match ch {
                 // notes
+                'C' => 0 * width + 3,
+                'D' => 0 * width + 6,
+                'F' => 0 * width + 12,
+                'G' => 0 * width + 15,
+                'A' => 0 * width + 18,
                 'c' => 2 * width + 1,
                 'd' => 2 * width + 4,
                 'e' => 2 * width + 7,
@@ -69,77 +67,22 @@ impl<'a> Chord<'a> {
                 'g' => 2 * width + 13,
                 'a' => 2 * width + 16,
                 'b' => 2 * width + 19,
-                'C' => 3,
-                'D' => 6,
-                'F' => 12,
-                'G' => 15,
-                'A' => 18,
-                // switch to position
-                '0' => 2 * width + 22,
-                '1' => 24,
-                '2' => 2 * width + 25,
-                '3' => 27,
-                '4' => 2 * width + 28,
                 _ => panic!(),
             };
-            board[idx] = '●';
+            segment[idx] = '●';
+
+            segment[1 * width - 2] = if n == n_max { '┐' } else { '┬' };
+            segment[2 * width - 2] = '│';
+            segment[3 * width - 2] = if n == n_max { '┘' } else { '┴' };
         }
+        segment.push('\n');
+        board.push(segment.iter().collect::<String>());
 
-        board.iter().collect()
-    }
+        let lines: Vec<Vec<&str>> = board.iter().map(|s| s.lines().collect()).collect();
 
-    pub fn keyboard2(&self) -> String {
-        if self.pattern2.trim().is_empty() {
-            return String::from("");
-        }
-
-        let mut board: Vec<char> = KEYBOARD2.chars().collect();
-        let width: usize = board.iter().position(|c| *c == '\n').expect("newline") + 1;
-
-        for ch in self.pattern2.chars() {
-            let idx: usize = match ch {
-                // notes
-                'f' => 2 * width + 1,
-                'g' => 2 * width + 4,
-                'a' => 2 * width + 7,
-                'b' => 2 * width + 10,
-                'c' => 2 * width + 13,
-                'd' => 2 * width + 16,
-                'e' => 2 * width + 19,
-                'F' => 3,
-                'G' => 6,
-                'A' => 9,
-                'C' => 15,
-                'D' => 18,
-                // switch to position
-                '0' => 2 * width + 22,
-                '1' => 24,
-                '2' => 2 * width + 25,
-                '3' => 27,
-                '4' => 2 * width + 28,
-                '5' => 30,
-                '6' => 2 * width + 31,
-                _ => panic!(),
-            };
-            board[idx] = '●';
-        }
-
-        board.iter().collect()
-    }
-
-    pub fn keyboard(&self) -> String {
-        let (kb1, kb2) = (self.keyboard1(), self.keyboard2());
-        if kb1.is_empty() {
-            kb2
-        } else if kb2.is_empty() {
-            kb1
-        } else {
-            // interleave keyboard1 and keyboard2
-            kb1.lines()
-                .zip(kb2.lines())
-                .map(|(a, b)| format!("{a}{b}"))
-                .collect::<Vec<_>>()
-                .join("\n")
-        }
+        (0..lines[0].len())
+            .map(|i| lines.iter().map(|s| s[i]).collect::<String>())
+            .collect::<Vec<_>>()
+            .join("\n")
     }
 }
