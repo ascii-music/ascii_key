@@ -71,7 +71,7 @@ pub static ALL_CHORDS: &'static [Chord] = &[
     Chord::new(&["G+"], "", "gbD", &["G augmented"]),
     Chord::new(&["G#", "Ab"], "", "GcD", &["G♯", "A♭"]),
     Chord::new(&["G#7", "Ab7"], "", "GcD1", &["G♯ 7ᵗʰ", "A♭ 7ᵗʰ"]),
-    Chord::new(&["G#m"], "", "GbD", &["G♯ minor", "A♭ minor"]),
+    Chord::new(&["G#m", "Abm"], "", "GbD", &["G♯ minor", "A♭ minor"]),
     Chord::new(&["G#m7", "Abm7"], "", "GbD1", &["G♯ minor 7ᵗʰ", "A♭ minor 7ᵗʰ"]),
     Chord::new(&["G#maj7", "Abmaj7"], "GcD2", "", &["G♯ raised 7ᵗʰ", "A♭ raised 7ᵗʰ"]),
     Chord::new(&["A"], "", "aCe", &["A"]),
@@ -176,6 +176,19 @@ mod tests {
             for chr in chord.pattern2.chars() {
                 assert!("abcdefgACDEFG0123456".contains(chr));
             }
+        }
+    }
+
+    #[test]
+    fn test_aliases() {
+        for chord in ALL_CHORDS {
+            assert_eq!(
+                chord.short_names.len(),
+                chord.names.len(),
+                "Aliases issue short_names={:?} names={:?}",
+                chord.short_names,
+                chord.names
+            )
         }
     }
 }
