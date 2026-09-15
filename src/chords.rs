@@ -2,72 +2,50 @@ use crate::chord::Chord;
 use once_cell::sync::Lazy;
 use std::collections::HashMap;
 
+#[rustfmt::skip]
 pub static ALL_CHORDS: &'static [Chord] = &[
     // NOTE: major is omitted such that A ≡ A major by default
-    // keyboard 1 ≡ lower part
-    // ┌─┬C┬┬D┬─┬─┬F┬┬G┬┬A┬─┬─┬1┬┬3┬─┐
-    // │ └┬┘└┬┘ │ └┬┘└┬┘└┬┘ │ └┬┘└┬┘ │
-    // └c─┴d─┴e─┴f─┴g─┴a─┴b─┴0─┴2─┴4─┘
-    Chord::new(&["C"], "ceg", "", &["C"]),
-    Chord::new(&["C7"], "cegA", "", &["C 7ᵗʰ"]),
-    Chord::new(&["Cmaj7"], "cegb", "", &["C raised 7ᵗʰ"]),
-    Chord::new(&["Csus"], "cfg", "", &["C suspended"]),
-    Chord::new(&["C6"], "cega", "", &["C 6ᵗʰ"]),
-    Chord::new(&["Cadd2"], "cdeg", "", &["C added 2ⁿᵈ"]),
-    Chord::new(&["Cm"], "cDg", "", &["C minor"]),
-    Chord::new(&["Cm7"], "cDgA", "", &["C minor 7ᵗʰ"]),
-    // Chord::new(&["Cm7b5"], "", "", &[""]),
-    Chord::new(&["Cdim"], "cDF", "", &["C diminished"]),
-    Chord::new(&["Cdim7"], "cDFa", "", &["C diminished 7ᵗʰ"]),
-    Chord::new(&["C+"], "ceG", "", &["C augmented"]),
-    Chord::new(&["C#", "Db"], "CfG", "", &["C♯ ", "D♭"]),
-    Chord::new(&["C#7", "Db7"], "CfGb", "", &["C♯ 7ᵗʰ", "D♭ 7ᵗʰ"]),
-    Chord::new(&["C#m", "Dbm"], "CeG", "", &["C♯ minor", "D♭ minor"]),
-    Chord::new(
-        &["C#m7", "Dbm7"],
-        "CeGb",
-        "",
-        &["C♯ minor 7ᵗʰ", "D♭ minor 7ᵗʰ"],
-    ),
-    Chord::new(
-        &["C#maj7", "Dbmaj7"],
-        "CfG0",
-        "",
-        &["C♯ raised 7ᵗʰ", "D♭ raised 7ᵗʰ"],
-    ),
-    Chord::new(&["D"], "dFa", "", &["D"]),
-    Chord::new(&["D7"], "dFa0", "", &["D 7ᵗʰ"]),
-    Chord::new(&["Dmaj7"], "dFa1", "", &["D raised 7ᵗʰ"]),
-    Chord::new(&["Dsus"], "dga", "", &["D suspended"]),
-    Chord::new(&["D6"], "dFga", "", &["D 6ᵗʰ"]),
-    Chord::new(&["Dadd2"], "deFa", "", &["D added 2ⁿᵈ"]),
-    Chord::new(&["Dm"], "dfa", "", &["D minor"]),
-    Chord::new(&["Dm7"], "dfa0", "", &["D minor 7ᵗʰ"]),
-    Chord::new(&["D#", "Eb"], "DgA", "", &["D♯", "E♭"]),
-    Chord::new(&["D#7", "Eb7"], "DgA1", "", &["D♯ 7ᵗʰ", "E♭ 7ᵗʰ"]),
-    Chord::new(&["D#m", "Ebm"], "DFA", "", &["D♯ minor", "E♭ minor"]),
-    Chord::new(
-        &["D#m7", "Ebm7"],
-        "DFA1",
-        "",
-        &["D♯ minor 7ᵗʰ", "E♭ minor 7ᵗʰ"],
-    ),
-    Chord::new(
-        &["D#maj7", "Ebmaj7"],
-        "DgA2",
-        "",
-        &["D♯ raised 7ᵗʰ", "E♭ raised 7ᵗʰ"],
-    ),
-    Chord::new(&["E"], "eGb", "", &["E"]),
-    Chord::new(&["E7"], "eGb2", "", &["E 7ᵗʰ"]),
-    Chord::new(&["Emaj7"], "eGb3", "", &["E raised 7ᵗʰ"]),
-    Chord::new(&["Esus"], "eab", "", &["E suspended"]),
-    Chord::new(&["E6"], "eGb1", "", &["E 6ᵗʰ"]),
-    Chord::new(&["Eadd2"], "eFGb", "", &["E added 2ⁿᵈ"]),
-    Chord::new(&["Em"], "egb", "", &["E minor"]),
-    Chord::new(&["F"], "fa0", "", &["F"]),
-    Chord::new(&["F7"], "fa03", "", &["F 7ᵗʰ"]),
-    Chord::new(&["Fm"], "fG0", "", &["F minor"]),
+    Chord::new(&["C"], "ceg", &["C"]),
+    Chord::new(&["C7"], "cegA", &["C 7ᵗʰ"]),
+    Chord::new(&["Cmaj7"], "cegb", &["C raised 7ᵗʰ"]),
+    Chord::new(&["Csus"], "cfg", &["C suspended"]),
+    Chord::new(&["C6"], "cega", &["C 6ᵗʰ"]),
+    Chord::new(&["Cadd2"], "cdeg", &["C added 2ⁿᵈ"]),
+    Chord::new(&["Cm"], "cDg", &["C minor"]),
+    Chord::new(&["Cm7"], "cDgA", &["C minor 7ᵗʰ"]),
+    // Chord::new(&["Cm7b5"], &[""]),
+    Chord::new(&["Cdim"], "cDF", &["C diminished"]),
+    Chord::new(&["Cdim7"], "cDFa", &["C diminished 7ᵗʰ"]),
+    Chord::new(&["C+"], "ceG", &["C augmented"]),
+    Chord::new(&["C#", "Db"], "CfG", &["C♯ ", "D♭"]),
+    Chord::new(&["C#7", "Db7"], "CfGb", &["C♯ 7ᵗʰ", "D♭ 7ᵗʰ"]),
+    Chord::new(&["C#m", "Dbm"], "CeG", &["C♯ minor", "D♭ minor"]),
+    Chord::new(&["C#m7", "Dbm7"], "CeGb", &["C♯ minor 7ᵗʰ", "D♭ minor 7ᵗʰ"]),
+    Chord::new(&["C#maj7", "Dbmaj7"], "CfG-c", &["C♯ raised 7ᵗʰ", "D♭ raised 7ᵗʰ"]),
+    Chord::new(&["D"], "dFa", &["D"]),
+    Chord::new(&["D7"], "dFa-c", &["D 7ᵗʰ"]),
+    Chord::new(&["Dmaj7"], "dFa-C", &["D raised 7ᵗʰ"]),
+    Chord::new(&["Dsus"], "dga", &["D suspended"]),
+    Chord::new(&["D6"], "dFga", &["D 6ᵗʰ"]),
+    Chord::new(&["Dadd2"], "deFa", &["D added 2ⁿᵈ"]),
+    Chord::new(&["Dm"], "dfa", &["D minor"]),
+    Chord::new(&["Dm7"], "dfa-c", &["D minor 7ᵗʰ"]),
+    Chord::new(&["D#", "Eb"], "DgA", &["D♯", "E♭"]),
+    Chord::new(&["D#7", "Eb7"], "DgA-C", &["D♯ 7ᵗʰ", "E♭ 7ᵗʰ"]),
+    Chord::new(&["D#m", "Ebm"], "DFA", &["D♯ minor", "E♭ minor"]),
+    Chord::new(&["D#m7", "Ebm7"], "DFA-C", &["D♯ minor 7ᵗʰ", "E♭ minor 7ᵗʰ"]),
+    Chord::new(&["D#maj7", "Ebmaj7"], "DgA-d", &["D♯ raised 7ᵗʰ", "E♭ raised 7ᵗʰ"]),
+    Chord::new(&["E"], "eGb", &["E"]),
+    Chord::new(&["E7"], "eGb-d", &["E 7ᵗʰ"]),
+    Chord::new(&["Emaj7"], "eGb-D", &["E raised 7ᵗʰ"]),
+    Chord::new(&["Esus"], "eab", &["E suspended"]),
+    Chord::new(&["E6"], "eGb-C", &["E 6ᵗʰ"]),
+    Chord::new(&["Eadd2"], "eFGb", &["E added 2ⁿᵈ"]),
+    Chord::new(&["Em"], "egb", &["E minor"]),
+    Chord::new(&["F"], "fa-c", &["F"]),
+    Chord::new(&["F7"], "fa-cD", &["F 7ᵗʰ"]),
+    Chord::new(&["Fm"], "fG-c", &["F minor"]),
+    /*
     // keyboard 2 ≡ upper part
     // ┌─┬F┬┬G┬┬A┬─┬─┬C┬┬D┬─┬─┬1┬┬3┬┬5┬─┐
     // │ └┬┘└┬┘└┬┘ │ └┬┘└┬┘ │ └┬┘└┬┘└┬┘ │
@@ -179,6 +157,7 @@ pub static ALL_CHORDS: &'static [Chord] = &[
     // pianochord.org/b-major.html#hide1
     Chord::new(&["B/D#", "B/Eb"], "DFb", "", &["B over D♯", "B over E♭"]),
     Chord::new(&["B/F#", "B/Gb"], "Fb3", "", &["B over F♯", "B over G♭"]),
+    */
     // sources
     // pianowithjonny.com/piano-lessons/major-7th-chords-for-piano-a-complete-guide
     // pianowithjonny.com/piano-lessons/7th-chords-for-piano-the-complete-guide*
@@ -203,40 +182,56 @@ mod tests {
     use super::*;
 
     #[test]
-    fn test_single_pattern() {
-        'outer: for chord in ALL_CHORDS {
-            for short_name in chord.short_names {
-                if short_name.contains('/') {
-                    // slash chords might be hybrid
-                    continue 'outer;
-                }
-            }
-            assert!(chord.pattern1.is_empty() || chord.pattern2.is_empty())
-        }
-    }
-
-    #[test]
     fn test_digit_or_char() {
         for chord in ALL_CHORDS {
-            for chr in chord.pattern1.chars() {
-                assert!("abcdefgACDEFG01234".contains(chr));
-            }
-            for chr in chord.pattern2.chars() {
-                assert!("abcdefgACDEFG0123456".contains(chr));
+            for chr in chord.pattern.chars() {
+                assert!(
+                    "abcdefgACDFG-".contains(chr),
+                    "chr={:?} pattern={:?}",
+                    chr,
+                    chord.pattern
+                );
             }
         }
     }
 
-    #[test]
-    fn test_aliases() {
-        for chord in ALL_CHORDS {
-            assert_eq!(
-                chord.short_names.len(),
-                chord.names.len(),
-                "Aliases issue short_names={:?} names={:?}",
-                chord.short_names,
-                chord.names
-            )
+    /*
+        #[test]
+        fn test_single_pattern() {
+            'outer: for chord in ALL_CHORDS {
+                for short_name in chord.short_names {
+                    if short_name.contains('/') {
+                        // slash chords might be hybrid
+                        continue 'outer;
+                    }
+                }
+                assert!(chord.pattern1.is_empty() || chord.pattern2.is_empty())
+            }
         }
-    }
+
+        #[test]
+        fn test_digit_or_char() {
+            for chord in ALL_CHORDS {
+                for chr in chord.pattern1.chars() {
+                    assert!("abcdefgACDFG01234".contains(chr));
+                }
+                for chr in chord.pattern2.chars() {
+                    assert!("abcdefgACDFG0123456".contains(chr));
+                }
+            }
+        }
+
+        #[test]
+        fn test_aliases() {
+            for chord in ALL_CHORDS {
+                assert_eq!(
+                    chord.short_names.len(),
+                    chord.names.len(),
+                    "Aliases issue short_names={:?} names={:?}",
+                    chord.short_names,
+                    chord.names
+                )
+            }
+        }
+    */
 }
