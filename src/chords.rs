@@ -57,7 +57,7 @@ pub static ALL_CHORDS: &'static [Chord] = &[
     Chord::new(&["F#7", "Gb7"], "FA-Ce", &["F♯ 7ᵗʰ", "G♭ 7ᵗʰ"]),
     Chord::new(&["F#m", "Gbm"], "Fa-C", &["F♯ minor", "G♭ minor"]),
     Chord::new(&["F#m7", "Gbm7"], "Fa-Ce", &["F♯ minor 7ᵗʰ", "G♭ minor 7ᵗʰ"]),
-    Chord::new(&["F#maj7", "Gbmaj7"], "FAC-f", &["F♯ raised 7ᵗʰ", "G♭ raised 7ᵗʰ"]),
+    Chord::new(&["F#maj7", "Gbmaj7"], "FA-Cf", &["F♯ raised 7ᵗʰ", "G♭ raised 7ᵗʰ"]),
     Chord::new(&["G"], "gb-d", &["G"]),
     Chord::new(&["G7"], "gb-df", &["G 7ᵗʰ"]),
     Chord::new(&["Gmaj7"], "gb-dF", &["G raised 7ᵗʰ"]),
