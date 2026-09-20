@@ -83,5 +83,7 @@ impl<'a> Chord<'a> {
             .map(|i| lines.iter().map(|s| s[i]).collect::<String>())
             .collect::<Vec<_>>()
             .join("\n")
+            // a continuation segment starts where the previous one ends: drop its left edge
+            .replace('\0', "")
     }
 }
