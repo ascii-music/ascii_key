@@ -30,7 +30,7 @@ pub static ALL_CHORDS: &'static [Chord] = &[
     Chord::new(&["D7"], "dFa-c", &["D 7ᵗʰ"]),
     Chord::new(&["Dmaj7"], "dFa-C", &["D raised 7ᵗʰ"]),
     Chord::new(&["Dsus"], "dga", &["D suspended"]),
-    Chord::new(&["D6"], "dFga", &["D 6ᵗʰ"]),
+    Chord::new(&["D6"], "dFAB", &["D 6ᵗʰ"]),
     Chord::new(&["Dadd2"], "deFa", &["D added 2ⁿᵈ"]),
     Chord::new(&["Dm"], "dfa", &["D minor"]),
     Chord::new(&["Dm7"], "dfa-c", &["D minor 7ᵗʰ"]),
