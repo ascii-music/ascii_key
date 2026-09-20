@@ -8,6 +8,7 @@ pub static ALL_CHORDS: &'static [Chord] = &[
     // ─┬C┬┬D┬─┬─┬F┬┬G┬┬A┬─
     //  └┬┘└┬┘ │ └┬┘└┬┘└┬┘ 
     // c─┴d─┴e─┴f─┴g─┴a─┴b─
+    // use the `-` separator to add another section to the keyboard
     Chord::new(&["C"], "ceg", &["C"]),
     Chord::new(&["C7"], "cegA", &["C 7ᵗʰ"]),
     Chord::new(&["Cmaj7"], "cegb", &["C raised 7ᵗʰ"]),
@@ -152,7 +153,7 @@ mod tests {
     use super::*;
 
     #[test]
-    fn test_digit_or_char() {
+    fn test_valid_chars() {
         for chord in ALL_CHORDS {
             for chr in chord.pattern.chars() {
                 assert!(
